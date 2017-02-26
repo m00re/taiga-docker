@@ -26,6 +26,7 @@ RUN rm -f $VERSION-stable.tar.gz
 WORKDIR /taiga.io/taiga-back-$VERSION
 ENV LIBRARY_PATH=/lib:/usr/lib
 RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install taiga-contrib-ldap-auth
 RUN python manage.py collectstatic --noinput
 
 # Setup default environment
@@ -42,6 +43,15 @@ ENV TAIGA_FRONTEND_DEBUG "false"
 ENV TAIGA_FEEDBACK_ENABLED "false"
 ENV TAIGA_DEFAULT_LANGUAGE "en"
 ENV TAIGA_DEFAULT_THEME "material-design"
+ENV LDAP_ENABLE "false"
+ENV LDAP_SERVER ""
+ENV LDAP_PORT 389
+ENV LDAP_BIND_DN ""
+ENV LDAP_BIND_PASSWORD ""
+ENV LDAP_SEARCH_BASE ""
+ENV LDAP_SEARCH_PROPERTY "sAMAccountName"
+ENV LDAP_EMAIL_PROPERTY = 'mail'
+ENV LDAP_FULL_NAME_PROPERTY = 'displayName'
 
 RUN mkdir /taiga.io/presets
 COPY local.py /taiga.io/presets/local.py

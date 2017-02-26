@@ -32,3 +32,21 @@ PUBLIC_REGISTER_ENABLED = (os.getenv('TAIGA_PUBLIC_REGISTER_ENABLED').lower() ==
 # Enable or disable debugging
 DEBUG = (os.getenv('TAIGA_BACKEND_DEBUG').lower() == 'true')
 TEMPLATE_DEBUG = (os.getenv('TAIGA_BACKEND_DEBUG').lower() == 'true')
+
+# Configure LDAP backend (if enabled)
+if os.getenv('LDAP_ENABLE').lower() == 'true':
+    INSTALLED_APPS += ["taiga_contrib_ldap_auth"]
+    LDAP_SERVER = os.getenv('LDAP_SERVER')
+    LDAP_PORT = int(os.getenv('LDAP_PORT'))
+    # Full DN of the service account use to connect to LDAP server and search for login user's account entry
+    # If LDAP_BIND_DN is not specified, or is blank, then an anonymous bind is attempated
+    LDAP_BIND_DN = os.getenv('LDAP_BIND_DN')
+    LDAP_BIND_PASSWORD = os.getenv('LDAP_BIND_PASSWORD')
+    # Starting point within LDAP structure to search for login user
+    LDAP_SEARCH_BASE = os.getenv('LDAP_SEARCH_BASE')
+    # LDAP property used for searching, ie. login username needs to match value in sAMAccountName property in LDAP
+    LDAP_SEARCH_PROPERTY = os.getenv('LDAP_SEARCH_PROPERTY')
+    LDAP_SEARCH_SUFFIX = None
+    # Names of LDAP properties on user account to get email and full name
+    LDAP_EMAIL_PROPERTY = os.getenv('LDAP_EMAIL_PROPERTY')
+    LDAP_FULL_NAME_PROPERTY = os.getenv('LDAP_FULL_NAME_PROPERTY')

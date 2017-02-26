@@ -57,6 +57,13 @@ elif [ -f /taiga.io/taiga-front/dist/conf.example.json ]; then
   sed -i "s/\"themes\":.*,/\"themes\": \[\"taiga\", \"material-design\"\],/g" /taiga.io/data/conf.json
   # ...as well as the default one
   sed -i "s/\"defaultTheme\":.*,/\"defaultTheme\": \"$TAIGA_DEFAULT_THEME\",/g" /taiga.io/data/conf.json
+
+  # Enable LDAP if enabled
+  export LDAP_ENABLE_LOWERCASE=$(echo "$LDAP_ENABLE" | tr '[:upper:]' '[:lower:]')
+  if [ "$LDAP_ENABLE_LOWERCASE" = "true" ]; then
+    sed -i "s/\"tribeHost\": null/\"tribeHost\": null, \"loginFormType\": \"ldap\"/g" /taiga.io/data/conf.json
+  fi
+
 fi
 
 # Finally, create a symlink from conf.json in the volume directory to the dist/ directory.
