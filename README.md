@@ -5,11 +5,13 @@ A small Docker Image for the open-source project management software Taiga.io  -
 Tested / supported versions of Taiga:
 
 - Version 3.0.0
+- Version 3.1.0
 
 ## Available Docker Images at DockerHub
 
 Image Name  | Tag        | Taiga Version | LDAP-Plugin
 ------------|------------|---------------|-------------
+m00re/taiga | 3.1.0-ldap | 3.1.0         | 0.1.1
 m00re/taiga | 3.0.0-ldap | 3.0.0         | 0.1.1
 m00re/taiga | 3.0.0      | 3.0.0         | Not included
 

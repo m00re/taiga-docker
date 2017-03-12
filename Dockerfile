@@ -1,12 +1,12 @@
 FROM python:3.4.5-alpine
 MAINTAINER Jens Mittag <kontakt@jensmittag.de>
 
-# Define build arguments: gitbucket version
-ARG VERSION=3.0.0
+# Define build arguments: Taiga version
+ARG VERSION=3.1.0
 
 # Install necessary packages
 RUN apk update &&\
-    apk add ca-certificates wget nginx git postgresql-dev musl-dev gcc jpeg-dev zlib-dev libxml2-dev libxslt-dev &&\
+    apk add ca-certificates wget nginx git postgresql-dev musl-dev gcc jpeg-dev zlib-dev libxml2-dev libxslt-dev libffi-dev &&\
     update-ca-certificates
 
 # Download taiga.io backend and frontend
